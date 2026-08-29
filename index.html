@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vijii ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:#44284d;background:linear-gradient(135deg,#fff8fc,#f8efff);overflow-x:hidden}
+#welcomeScreen{position:fixed;inset:0;z-index:9999;display:flex;justify-content:center;align-items:center;text-align:center;background:radial-gradient(circle at 20% 20%,rgba(255,160,210,.35),transparent 30%),radial-gradient(circle at 80% 80%,rgba(180,140,255,.35),transparent 35%),linear-gradient(135deg,#25002f,#630675,#d52d78);transition:opacity 1s ease,visibility 1s ease;overflow:hidden}
+#welcomeScreen:before{content:"";position:absolute;inset:0;background-image:radial-gradient(white 1px,transparent 1px);background-size:55px 55px;opacity:.3;animation:starsMove 15s linear infinite}
+.welcome-content{position:relative;z-index:5;color:white;padding:30px}
+.gift{font-size:110px;animation:floating 2s ease-in-out infinite;filter:drop-shadow(0 15px 25px rgba(0,0,0,.35))}
+.welcome-content h1{font-size:clamp(38px,7vw,75px);margin:20px 0 12px;text-shadow:0 5px 25px rgba(0,0,0,.4)}
+.welcome-content p{font-size:20px;margin-bottom:35px}
+#surpriseButton{border:none;padding:20px 50px;font-size:20px;font-weight:bold;color:#650879;background:white;border-radius:60px;cursor:pointer;box-shadow:0 10px 35px rgba(0,0,0,.35);transition:transform .25s,box-shadow .25s}
+#surpriseButton:hover{transform:scale(1.1);box-shadow:0 15px 50px rgba(255,255,255,.45)}
+#surpriseButton:active{transform:scale(.92)}
+#boomScreen{position:fixed;inset:0;z-index:9998;display:none;justify-content:center;align-items:center;text-align:center;overflow:hidden;background:#05000b}
+#boomScreen.show{display:flex;animation:boomBackground 4.5s ease forwards}
+.boomContent{position:relative;z-index:30}
+.boomWord{font-size:clamp(80px,20vw,250px);font-weight:1000;color:white;letter-spacing:8px;text-shadow:0 0 10px white,0 0 30px #ffcc00,0 0 60px #ff4f9a,0 0 100px #ff4f9a;animation:giantBoom 1.7s cubic-bezier(.17,.67,.32,1.4)}
+.birthdayBoom{font-size:clamp(30px,7vw,90px);font-weight:900;color:white;margin-top:10px;opacity:0;animation:birthdayAppear 1s ease 1.3s forwards;text-shadow:0 0 20px white,0 0 40px #ff4f9a,0 0 70px #ff4f9a}
+.explosion{position:absolute;width:30px;height:30px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:white;box-shadow:0 0 20px white,0 0 50px #ffcc00,0 0 100px #ff4f9a;animation:explosionExpand 1.5s ease-out forwards}
+.explosion:before{content:"";position:absolute;inset:0;border-radius:50%;border:8px solid white;animation:ringExpand 1.8s ease-out forwards}
+.explosion:after{content:"";position:absolute;inset:0;border-radius:50%;border:5px solid #ffcc00;animation:ringExpand 2.2s ease-out forwards}
+#mainPage{display:none;position:relative}
+#mainPage.show{display:block;animation:pageAppear 1.5s ease}
+.background-animation{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-heart{position:absolute;bottom:-60px;opacity:.4;animation:bgHeartFloat linear forwards}
+.bg-sparkle{position:absolute;opacity:.5;animation:sparkleFloat 4s ease-in-out infinite}
+.hero{min-height:100vh;position:relative;z-index:2;display:flex;justify-content:center;align-items:center;padding:60px 5%;overflow:hidden;background:radial-gradient(circle at 75% 50%,rgba(255,190,225,.55),transparent 30%),radial-gradient(circle at 15% 20%,rgba(220,195,255,.4),transparent 30%),linear-gradient(135deg,#fff9fd,#f4edff)}
+.hero:before{content:"";position:absolute;width:700px;height:700px;right:-250px;top:50%;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,116,185,.18),rgba(196,130,255,.12),transparent 70%);filter:blur(20px)}
+.hero-content{width:100%;max-width:1450px;display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:center}
+.hero-text{text-align:left;padding-left:20px;position:relative;z-index:5}
+.hero-small{color:#d62978;font-size:18px;font-weight:bold;letter-spacing:3px;margin-bottom:18px}
+.hero-text h1{font-size:clamp(55px,7vw,105px);line-height:.92;color:#46145f;margin-bottom:28px}
+.hero-text h1 span{color:#df286f;text-shadow:0 5px 20px rgba(223,38,111,.15)}
+.hero-subtitle{display:inline-block;padding:10px 18px;border-radius:30px;background:rgba(255,225,240,.85);color:#a51d60;font-size:16px;font-weight:bold;margin-bottom:20px}
+.hero-text p{max-width:600px;font-size:19px;line-height:1.9;color:#59435f}
+.hero-cake{position:relative;min-height:680px;display:flex;justify-content:center;align-items:center;overflow:visible}
+.hero-cake .cake-glow{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(255,178,215,.55) 0%,rgba(255,205,232,.32) 35%,rgba(210,175,255,.18) 55%,transparent 75%);filter:blur(8px);animation:cakeGlow 4s ease-in-out infinite}
+.hero-cake .cake-glow-two{position:absolute;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.9),transparent 70%);filter:blur(15px);opacity:.8}
+.cake-image-wrapper{position:relative;z-index:5;width:720px;max-width:100%;height:650px;display:flex;justify-content:center;align-items:center;animation:cakeFloat 4s ease-in-out infinite}
+.cake-image-wrapper:before{content:"";position:absolute;width:90%;height:75%;bottom:5%;left:5%;border-radius:50%;background:radial-gradient(ellipse,rgba(100,45,90,.20),transparent 70%);filter:blur(30px);z-index:-1}
+.cake-image{width:100%;height:100%;object-fit:contain;-webkit-mask-image:radial-gradient(ellipse 72% 67% at 50% 50%,black 48%,rgba(0,0,0,.95) 60%,rgba(0,0,0,.6) 72%,transparent 100%);mask-image:radial-gradient(ellipse 72% 67% at 50% 50%,black 48%,rgba(0,0,0,.95) 60%,rgba(0,0,0,.6) 72%,transparent 100%);filter:drop-shadow(0 25px 30px rgba(100,35,85,.20)) saturate(1.08) contrast(1.03);transition:transform .5s ease,filter .5s ease}
+.cake-image:hover{transform:scale(1.04);filter:drop-shadow(0 30px 40px rgba(100,35,85,.25)) saturate(1.12) contrast(1.04)}
+.cake-decoration{position:absolute;z-index:8;font-size:30px;filter:drop-shadow(0 5px 10px rgba(80,30,80,.15));animation:decorationFloat 3s ease-in-out infinite}
+.decoration-one{top:18%;left:5%}.decoration-two{top:12%;right:7%}.decoration-three{bottom:17%;left:8%}.decoration-four{bottom:12%;right:10%}
+.memories{position:relative;z-index:2;padding:100px 5%;background:linear-gradient(135deg,#fff8fc,#f7f0ff)}
+.section-heading{text-align:center;margin-bottom:55px}
+.section-heading h2{font-size:clamp(32px,5vw,55px);color:#54206d;margin-bottom:12px}
+.section-heading h2 span{color:#d62978}
+.section-heading p{font-size:17px;color:#765f7d}
+.gallery{width:100%;max-width:1450px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.photo-card{background:white;padding:10px;border-radius:22px;box-shadow:0 12px 35px rgba(80,30,80,.13);transition:transform .3s ease,box-shadow .3s ease;overflow:hidden}
+.photo-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 20px 45px rgba(80,30,80,.22)}
+.photo-card img{display:block;width:100%;height:320px;object-fit:cover;border-radius:15px}
+.photo-card p{text-align:center;padding:16px 8px 10px;font-size:16px;font-weight:bold;color:#65227d}
+.message-section{position:relative;z-index:2;padding:100px 5%;background:#fff8fc}
+.messages-grid{max-width:1300px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.message-card{background:white;border:2px solid #f0d8e7;border-radius:20px;padding:25px;box-shadow:0 10px 30px rgba(80,30,80,.09)}
+.message-card h3{color:#65227d;font-size:18px;margin-bottom:15px}
+.message-card textarea{width:100%;min-height:130px;resize:vertical;border:1px solid #ead5e5;border-radius:12px;padding:14px;font-family:inherit;font-size:15px;color:#49384f;outline:none;background:#fffafd}
+.message-card textarea:focus{border-color:#d62978;box-shadow:0 0 0 3px rgba(214,41,120,.08)}
+.final-section{position:relative;z-index:2;padding:100px 5%}
+.final-card{max-width:1100px;margin:auto;padding:70px 50px;border-radius:35px;text-align:center;background:linear-gradient(135deg,#ffe5f1,#eee2ff,#ffe8f3);box-shadow:0 20px 60px rgba(90,30,90,.16);border:2px solid white}
+.final-card h2{color:#65227d;font-size:25px;margin-bottom:20px}
+.final-card h1{color:#d62978;font-size:clamp(35px,6vw,65px);margin-bottom:25px}
+.final-card p{max-width:850px;margin:auto;font-size:19px;line-height:1.9;color:#533e59}
+.signature{margin-top:30px;font-size:22px;font-weight:bold;color:#54206d}
+footer{position:relative;z-index:2;padding:45px 20px;text-align:center;color:white;background:linear-gradient(135deg,#41056d,#7b1f91,#d62978)}
+footer h2{font-size:26px;margin-bottom:12px}
+.confetti{position:fixed;width:12px;height:22px;top:-30px;z-index:10000;animation:fall linear forwards}
+.boomParticle{position:absolute;width:15px;height:15px;border-radius:50%;background:white;left:50%;top:50%;z-index:10;animation:particleExplosion 1.8s ease-out forwards}
+@keyframes floating{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes cakeFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(.7deg)}}
+@keyframes cakeGlow{0%,100%{transform:scale(.95);opacity:.65}50%{transform:scale(1.08);opacity:1}}
+@keyframes decorationFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(8deg)}}
+@keyframes giantBoom{0%{transform:scale(0) rotate(-15deg);opacity:0}35%{transform:scale(1.8) rotate(5deg);opacity:1}55%{transform:scale(.85) rotate(-3deg)}75%{transform:scale(1.15) rotate(2deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes birthdayAppear{0%{transform:scale(0) translateY(40px);opacity:0}60%{transform:scale(1.2) translateY(-10px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}
+@keyframes explosionExpand{0%{width:20px;height:20px;opacity:1}30%{width:250px;height:250px;opacity:1}100%{width:1500px;height:1500px;opacity:0}}
+@keyframes ringExpand{0%{transform:scale(1);opacity:1}100%{transform:scale(30);opacity:0}}
+@keyframes particleExplosion{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(0);opacity:0}}
+@keyframes boomBackground{0%{background:#05000b}15%{background:white}25%{background:#ffcc00}40%{background:#ff4f9a}60%{background:#6a0dad}100%{background:#4b087c}}
+@keyframes pageAppear{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fall{from{transform:translateY(-50px) rotate(0)}to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes bgHeartFloat{from{transform:translateY(0) translateX(0);opacity:0}15%{opacity:.5}to{transform:translateY(-110vh) translateX(100px);opacity:0}}
+@keyframes sparkleFloat{0%,100%{transform:scale(.8) rotate(0);opacity:.3}50%{transform:scale(1.4) rotate(180deg);opacity:.8}}
+@keyframes starsMove{from{transform:translateY(0)}to{transform:translateY(55px)}}
+@media(max-width:1000px){.hero-content{grid-template-columns:1fr;text-align:center}.hero-text{text-align:center;padding-left:0}.hero-text p{margin:auto}.hero-cake{min-height:600px}.cake-image-wrapper{height:600px;width:750px}.gallery{grid-template-columns:repeat(2,1fr)}.messages-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.welcome-content h1{font-size:38px}.welcome-content p{font-size:16px}#surpriseButton{padding:17px 30px;font-size:17px}.hero{padding:60px 15px}.hero-text h1{font-size:52px}.hero-text p{font-size:16px}.hero-cake{min-height:460px}.hero-cake .cake-glow{width:390px;height:390px}.cake-image-wrapper{width:100%;height:460px}.cake-decoration{font-size:22px}.gallery{grid-template-columns:1fr}.photo-card img{height:320px}.messages-grid{grid-template-columns:1fr}.memories,.message-section,.final-section{padding:65px 20px}.final-card{padding:60px 25px}.boomWord{letter-spacing:2px}}
+</style>
+</head>
+<body>
+
+<div id="welcomeScreen">
+  <div class="welcome-content">
+    <div class="gift">🎁</div>
+    <h1>Someone has a surprise...</h1>
+    <p>There is something waiting for you ❤️</p>
+    <button id="surpriseButton">✨ PRESS THE BUTTON ✨</button>
+  </div>
+</div>
+
+<div id="boomScreen">
+  <div class="explosion"></div>
+  <div class="boomContent">
+    <div class="boomWord">BOOM!</div>
+    <div class="birthdayBoom">🎉 HAPPY BIRTHDAY VIJII 🎂❤️</div>
+  </div>
+</div>
+
+<main id="mainPage">
+<div class="background-animation" id="backgroundAnimation"></div>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-small">❤️ YOUR SPECIAL DAY ❤️</div>
+      <h1>HAPPY<br>BIRTHDAY<br><span>VIJII</span></h1>
+      <div class="hero-subtitle">🎂 A DAY TO CELEBRATE YOU 🎂</div>
+      <p>
+        We all wish you a very happy birthday! 🎉
+        <br><br>
+        We all wish you that you will have a great journey in your life after this.
+        <br><br>
+        After this, you will see all the enjoyable moments in life, create beautiful memories,
+        achieve your dreams and always have reasons to smile. ❤️
+        <br><br>
+        Keep smiling, keep being amazing, and enjoy your special day! ✨
+      </p>
+    </div>
+
+    <div class="hero-cake">
+      <div class="cake-glow"></div>
+      <div class="cake-glow-two"></div>
+      <div class="cake-decoration decoration-one">✨</div>
+      <div class="cake-decoration decoration-two">💕</div>
+      <div class="cake-decoration decoration-three">🎀</div>
+      <div class="cake-decoration decoration-four">✨</div>
+      <div class="cake-image-wrapper">
+        <img class="cake-image"
+             src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=90"
+             alt="Beautiful birthday cake">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="memories">
+  <div class="section-heading">
+    <h2>📸 OUR <span>MEMORIES</span></h2>
+    <p>Some moments are meant to be remembered forever ❤️</p>
+  </div>
+  <div class="gallery">
+    <script>
+      for(let i=1;i<=18;i++){
+        document.write(`
+          <div class="photo-card">
+            <img src="photo${i}.jpg" alt="Memory ${i}">
+            <p>Beautiful memory ${i} ❤️</p>
+          </div>
+        `);
+      }
+    </script>
+  </div>
+</section>
+
+<section class="message-section">
+  <div class="section-heading">
+    <h2>💌 MESSAGES <span>FROM EVERYONE</span></h2>
+    <p>Write your birthday wishes for Vijii ❤️</p>
+  </div>
+  <div class="messages-grid">
+    <script>
+      const messageIcons=["❤️","💕","🎉","🥳","💖","✨"];
+      for(let i=1;i<=6;i++){
+        document.write(`
+          <div class="message-card">
+            <h3>${messageIcons[i-1]} From Person ${i}</h3>
+            <textarea placeholder="Write your message here..."></textarea>
+          </div>
+        `);
+      }
+    </script>
+  </div>
+</section>
+
+<section class="final-section">
+  <div class="final-card">
+    <h2>🎈 🎁 🎂<br>ONCE AGAIN...</h2>
+    <h1>HAPPY BIRTHDAY VIJII! ❤️</h1>
+    <p>
+      May this new year of your life bring you lots of happiness, beautiful memories,
+      success, laughter and countless reasons to smile.
+      <br><br>
+      Have an amazing journey ahead! ✨
+    </p>
+    <div class="signature">WITH LOVE,<br>DARK SQUAD 🖤</div>
+  </div>
+</section>
+
+<footer>
+  <h2>HAPPY BIRTHDAY VIJII ❤️</h2>
+  <p>Made with ❤️ by Dark Squad</p>
+  <br>
+  <p>🎂 🎉 🎈 💕 ✨ 🖤</p>
+</footer>
+</main>
+
+<script>
+const button=document.getElementById("surpriseButton");
+const welcomeScreen=document.getElementById("welcomeScreen");
+const boomScreen=document.getElementById("boomScreen");
+const mainPage=document.getElementById("mainPage");
+const backgroundAnimation=document.getElementById("backgroundAnimation");
+
+button.addEventListener("click",function(){
+  welcomeScreen.style.opacity="0";
+  welcomeScreen.style.visibility="hidden";
+  boomScreen.classList.add("show");
+  createBoomParticles();
+  createConfetti();
+
+  setTimeout(function(){
+    boomScreen.style.opacity="0";
+    setTimeout(function(){
+      boomScreen.style.display="none";
+      mainPage.classList.add("show");
+      document.body.style.overflow="auto";
+      startBackgroundAnimation();
+    },800);
+  },4500);
+});
+
+function createBoomParticles(){
+  for(let i=0;i<120;i++){
+    const particle=document.createElement("div");
+    particle.classList.add("boomParticle");
+    const angle=Math.random()*Math.PI*2;
+    const distance=Math.random()*750+200;
+    particle.style.setProperty("--x",Math.cos(angle)*distance+"px");
+    particle.style.setProperty("--y",Math.sin(angle)*distance+"px");
+    const size=Math.random()*15+5;
+    particle.style.width=size+"px";
+    particle.style.height=size+"px";
+    document.body.appendChild(particle);
+    setTimeout(()=>particle.remove(),3000);
+  }
+}
+
+function createConfetti(){
+  for(let i=0;i<220;i++){
+    const confetti=document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left=Math.random()*100+"vw";
+    const size=Math.random()*10+5;
+    confetti.style.width=size+"px";
+    confetti.style.height=size*1.8+"px";
+    confetti.style.animationDuration=Math.random()*3+2+"s";
+    confetti.style.animationDelay=Math.random()+"s";
+    document.body.appendChild(confetti);
+    setTimeout(()=>confetti.remove(),7000);
+  }
+}
+
+function startBackgroundAnimation(){
+  setInterval(function(){
+    const heart=document.createElement("div");
+    heart.classList.add("bg-heart");
+    const hearts=["❤️","💕","💖","💗","💜","🩷"];
+    heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*20+15+"px";
+    heart.style.animationDuration=Math.random()*4+5+"s";
+    backgroundAnimation.appendChild(heart);
+    setTimeout(()=>heart.remove(),10000);
+  },700);
+
+  setInterval(function(){
+    const sparkle=document.createElement("div");
+    sparkle.classList.add("bg-sparkle");
+    sparkle.innerHTML="✦";
+    sparkle.style.left=Math.random()*100+"vw";
+    sparkle.style.top=Math.random()*100+"vh";
+    backgroundAnimation.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),6000);
+  },1000);
+}
+
+document.querySelectorAll("textarea").forEach(function(textarea,index){
+  const saved=localStorage.getItem("birthdayMessage_"+index);
+  if(saved) textarea.value=saved;
+  textarea.addEventListener("input",function(){
+    localStorage.setItem("birthdayMessage_"+index,textarea.value);
+  });
+});
+</script>
+</body>
+</html>
